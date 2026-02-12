@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Be My Valentine ❤️</title>
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      width: 360px;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    #extraText {
+      font-size: 15px;
+      color: #ff4d6d;
+      height: 22px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 12px 25px;
+      border-radius: 30px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #no {
+      background: #ddd;
+      position: absolute;
+    }
+
+    #gif {
+      width: 230px;
+      display: none;
+      margin: 0 auto 15px auto;
+      border-radius: 15px;
+    }
+
+    .heart {
+      font-size: 40px;
+      display: none;
+      margin-top: 10px;
+    }
+
+    /* Hidden YouTube player */
+    #ytMusic {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1 id="message"></h1>
+    <div id="extraText"></div>
+
+    <button id="yes">Yes ❤️</button>
+    <button id="no">No 😜</button>
+
+    <img id="gif"
+      src="https://media.giphy.com/media/KmxmoHUGPDjfQXqGgv/giphy.gif" />
+
+    <div class="heart" id="heart">💖 Yaaay! 💖</div>
+  </div>
+
+  <!-- 🎵 Hidden YouTube music -->
+  <iframe
+    id="ytMusic"
+    width="0"
+    height="0"
+    src=""
+    allow="autoplay">
+  </iframe>
+
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const from = params.get("from") || "Someone";
+    const to = params.get("to") || "You";
+
+    const message = document.getElementById("message");
+    const extraText = document.getElementById("extraText");
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const heart = document.getElementById("heart");
+    const gif = document.getElementById("gif");
+    const ytMusic = document.getElementById("ytMusic");
+
+    message.innerHTML = `${to}, will you be my Valentine?<br>— ${from}`;
+
+    const texts = [
+      "Pleaseee 🥺",
+      "Don’t break my heart 💔",
+      "Think again 😭",
+      "Pretty please 💕",
+      "Just say yes 😘"
+    ];
+
+    function moveNoButton() {
+      const x = Math.random() * 260;
+      const y = Math.random() * 180;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      extraText.innerText =
+        texts[Math.floor(Math.random() * texts.length)];
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    // ✅ YES CLICK
+    yesBtn.addEventListener("click", () => {
+      message.innerHTML = `YES! 💘`;
+      extraText.innerText = "Best day ever ❤️";
+
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+
+      gif.style.display = "block";
+      heart.style.display = "block";
+
+      // 🎵 PLAY YOUTUBE MUSIC
+      ytMusic.src =
+        "https://www.youtube.com/embed/U7uYYwHOcmA?autoplay=1&loop=1&playlist=U7uYYwHOcmA";
+    });
+  </script>
+
+</body>
+</html>
